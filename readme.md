@@ -137,5 +137,5 @@ The scheduler.py file controls the entire workflow using Prefect for robust task
 
 This architecture provides a complete end-to-end pipeline from data collection to analysis and presentation, with both UI and API access to the processed data.
 
-## UI
+## Streamlit Dashboard
 [![Streamlit UI](http://img.youtube.com/vi/sbQWHOb1ndg/0.jpg)](https://www.youtube.com/watch?v=sbQWHOb1ndg)
