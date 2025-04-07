@@ -1,7 +1,5 @@
 # Real Estate Property Analysis System
 
-## Introduction
-
 The Real Estate Property Analysis System is an automated data pipeline designed to collect, process, and analyze property listings from popular Indian real estate websites. This project combines web crawling, data extraction, and AI-powered analysis to provide valuable insights for property investors and buyers.
 
 ### Key Features
