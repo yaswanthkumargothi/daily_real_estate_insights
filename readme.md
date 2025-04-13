@@ -3,7 +3,7 @@
 The Real Estate Property Analysis System is an automated data pipeline designed to collect, process, and analyze property listings from popular Indian real estate websites. This project combines web crawling, data extraction, and AI-powered analysis to provide valuable insights for property investors and buyers.
 
 ### Key Features
-- **Automated Data Collection**: Daily crawling of Housing.com and MagicBricks.com
+- **Automated Data Collection**: Daily crawling of real estate sites for new properties
 - **Intelligent Data Extraction**: Structured property data extraction using AI
 - **Interactive Dashboard**: Visual exploration of property trends and statistics
 - **Investment Analysis**: AI-powered recommendations for property investment
