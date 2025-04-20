@@ -17,88 +17,24 @@ The system is designed to be maintainable, extensible, and robust, with proper e
 This flowchart provides a visual overview of the real estate property analysis system architecture, showing how data flows from web crawling to analysis and presentation.
 
 ```mermaid
+---
+config:
+  layout: fixed
+  look: neo
+  theme: neo
+---
 flowchart TD
-    %% Define the main components
-    Scheduler["Scheduler (scheduler.py)"]
-    Prefect["Prefect Workflow Engine"]
-    
-    %% Data Collection
-    subgraph "Data Collection"
-        Housing["Housing.com Crawler\n(app.py)"]
-        MagicBricks["MagicBricks Crawler\n(magicbricks_app.py)"]
-        HousingHooks["Housing Hooks\n(crawlers/housing.py)"]
-        MBHooks["MagicBricks Hooks\n(crawlers/magicbricks.py)"]
-    end
-    
-    %% Data Processing
-    subgraph "Data Processing"
-        Extraction["Property Data Extraction\n(agents/extract_properties.py)"]
-        PropertySchema["Property Schema\n(models/property_schema.py)"]
-        LocationProcessor["Location Processor\n(utils/location_processor.py)"]
-        Cache["Cache System\n(/cache)"]
-    end
-    
-    %% Data Storage
-    subgraph "Data Storage"
-        RawData["Raw Data (Markdown)\n/data/*.md"]
-        ProcessedData["Processed Data (JSON)\n/data/*.json"]
-    end
-    
-    %% Data Analysis & Visualization
-    subgraph "Analysis & Visualization"
-        Dashboard["Streamlit Dashboard\n(app/streamlit_dashboard.py)"]
-        DashboardUI["Dashboard UI Components\n(ui/dashboard_ui.py)"]
-        Analysis["Property Analysis Agent\n(agents/property_analysis_agent.py)"]
-    end
-    
-    %% API Layer
-    subgraph "API Layer"
-        APIServer["FastAPI Server\n(api/main.py)"]
-        APIEndpoints{{"API Endpoints:\n- /properties\n- /stats\n- /health"}}
-    end
-    
-    %% External Dependencies
-    subgraph "External Services"
-        OpenAI["OpenAI API"]
-        PlayWright["Playwright Browser"]
-    end
-    
-    %% Define the connections and data flow
-    Scheduler -->|"Deploys & Schedules"| Prefect
-    Prefect -->|"Triggers Daily at 1AM"| Housing
-    Prefect -->|"Triggers Daily"| MagicBricks
-    Prefect -->|"Triggers Daily"| Extraction
-    Prefect -->|"Starts"| APIServer
-    
-    Housing -->|"Uses"| HousingHooks
-    MagicBricks -->|"Uses"| MBHooks
-    Housing -->|"Uses"| PlayWright
-    MagicBricks -->|"Uses"| PlayWright
-    
-    Housing -->|"Outputs"| RawData
-    MagicBricks -->|"Outputs"| RawData
-    
-    Extraction -->|"Reads"| RawData
-    Extraction -->|"Uses"| PropertySchema
-    Extraction -->|"Uses"| OpenAI
-    Extraction -->|"Saves to"| Cache
-    Extraction -->|"Outputs"| ProcessedData
-    
-    APIServer -->|"Serves"| APIEndpoints
-    APIServer -->|"Reads"| ProcessedData
-    
-    Dashboard -->|"Reads"| ProcessedData
-    Dashboard -->|"Uses"| LocationProcessor
-    Dashboard -->|"Uses"| DashboardUI
-    DashboardUI -->|"Uses"| Analysis
-    
-    Analysis -->|"Uses"| OpenAI
-    Analysis -->|"Analyzes"| ProcessedData
-    
-    %% User access
-    User(["User"])
-    User -->|"Views"| Dashboard
-    User -->|"Accesses"| APIEndpoints
+    Start["Start: Daily Data Update"] --> CloudWatchEvent["CloudWatch Event (Schedule)"]
+    CloudWatchEvent --> AWSLambda["AWS Lambda (Data Scraping & Processing)"]
+    AWSLambda --> AWSS3["AWS S3 (JSON Data Storage)"]
+    AWSLambda -- Optional --> AWSRDS["AWS RDS/DynamoDB (Database)"]
+    AWSS3 -- Data --> FastAPIApp["FastAPI App (on Lambda/EC2/ECS)"]
+    AWSRDS -- Data --> FastAPIApp
+    FastAPIApp --> AWSAPIGateway["AWS API Gateway (REST API)"]
+    AWSAPIGateway --> StreamlitDashboard["Streamlit Dashboard (S3 + CloudFront)"]
+    StreamlitDashboard --> User["User"] & AWSAPIGateway
+    User --> StreamlitDashboard
+
 ```
 
 ## System Architecture
