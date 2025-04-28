@@ -1,4 +1,24 @@
-# Real Estate Property Analysis System
+<div align="center">
+ 
+![logo](https://github.com/yaswanthkumargothi/daily_real_estate_insights/blob/main/real_estate_agent_logo.png)
+
+<h1 align="center"><strong> Real-Estate Daily Investment Insights Agent :<h6 align="center">AI-powered agentic system for investing in new Real estate </h6></strong></h1>
+
+![Python - Version](https://img.shields.io/badge/PYTHON-3.11+-blue?style=for-the-badge&logo=python&logoColor=white)
+![FastAPI - Version](https://img.shields.io/badge/FastAPI-0.104+-teal?style=for-the-badge&logo=fastapi)
+![Pydantic - Version](https://img.shields.io/badge/Pydantic-2.0+-red?style=for-the-badge&logo=pydantic)
+![Streamlit - Version](https://img.shields.io/badge/Streamlit-latest-orange?style=for-the-badge&logo=streamlit)
+![Pandas - Version](https://img.shields.io/badge/Pandas-latest-blue?style=for-the-badge&logo=pandas)
+![OpenAI - Version](https://img.shields.io/badge/OpenAI-1.0+-grey?style=for-the-badge&logo=openai)
+![Playwright - Version](https://img.shields.io/badge/Playwright-1.39+-brightgreen?style=for-the-badge&logo=playwright)
+![Prefect - Version](https://img.shields.io/badge/Prefect-2.0+-blue?style=for-the-badge&logo=prefect)
+[![GitHub Issues](https://img.shields.io/github/issues/souvikmajumder26/Multi-Agent-Medical-Assistant.svg?style=for-the-badge)](https://github.com/souvikmajumder26/Multi-Agent-Medical-Assistant/issues)
+![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg?style=for-the-badge)
+
+</div>
+
+
+# Real Estate Property Analysis Agent
 
 ## Introduction
 
